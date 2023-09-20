@@ -23,7 +23,7 @@ SRCREV="${AUTOREV}"
 # Where to find source files (can be local, GitHub, etc.)
 SRC_URI = "git://github.com/avnet-iotconnect/iotc-generic-c-sdk.git;\
 protocol=https;\
-branch=main;\
+branch=feature/IOTSDK-296-infinite-main-loop;\
 destsuffix=${C};\
 "
 

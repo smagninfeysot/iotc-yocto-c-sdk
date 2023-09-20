@@ -1,0 +1,11 @@
+[Unit]
+Description= Connects and sends some data to IoTConnect infinitely
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/basic-sample
+StandardOutput=journal+console
+StandardError=journal+console
+
+[Install]
+WantedBy=multi-user.target
