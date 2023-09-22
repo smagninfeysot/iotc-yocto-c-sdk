@@ -5,7 +5,7 @@ After=network.target network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/basic-sample
+ExecStart=/usr/bin/iotc-manager.sh
 StandardOutput=journal+console
 StandardError=journal+console
 
