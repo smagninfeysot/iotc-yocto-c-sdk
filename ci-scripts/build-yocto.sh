@@ -5,7 +5,7 @@ cd /src/
 ssh-keyscan -p 9418 -t rsa msc-git02.msc-ge.com >> ~/.ssh/known_hosts
 git clone ssh://gitolite@msc-git02.msc-ge.com:9418/msc_ol99/msc-ldk
 cd msc-ldk/
-git checkout v1.11.0
+git checkout v1.9.0
 pip3 install sphinx
 ./setup.py --bsp=01047
 cp -r /src/yocto-layers/meta-iotconnect /src/msc-ldk/sources/

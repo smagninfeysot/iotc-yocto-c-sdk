@@ -42,7 +42,7 @@ jobs:
           git clone ssh://gitolite@msc-git02.msc-ge.com:9418/msc_ol99/docker-msc-ldk 
           cd docker-msc-ldk
           sed -i '/COPY rootfs\/home\/.ssh\/id_rsa/d' Dockerfile
-          git checkout v1.11.0
+          git checkout v1.9.0
           mkdir src
           docker build -t=msc-ldk .
           cd ..
