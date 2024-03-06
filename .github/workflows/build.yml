@@ -94,7 +94,6 @@ jobs:
     runs-on: [self-hosted, rpi]
     needs:
       [
-        build-msc-sm2s-imx8plus,
         build-yocto
       ]
     steps:
@@ -121,7 +120,6 @@ jobs:
     needs:
       [
         build-msc-sm2s-imx8plus,
-        test-image,
       ]
     steps:
       - name: "clean build dir"
