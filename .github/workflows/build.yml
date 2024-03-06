@@ -91,7 +91,7 @@ jobs:
     runs-on: [self-hosted, rpi]
     needs:
       [
-        build-docker,
+        build-docker
       ]
     steps:
       - name: "Download new firmware for the board" 
