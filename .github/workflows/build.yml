@@ -40,7 +40,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
         with:
           driver-opts: network=host
-      - name: Build Docker
+      - name: Prepare Docker Image
         run: |
           ssh-keyscan -p 9418 -t rsa msc-git02.msc-ge.com >> ~/.ssh/known_hosts
           git clone ssh://gitolite@msc-git02.msc-ge.com:9418/msc_ol99/docker-msc-ldk 
@@ -51,7 +51,7 @@ jobs:
       - name:  Build and push to local registry
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: docker-msc-ldk
           push: true
           tags: localhost:5000/msc-ldk-hardknott:latest
       - name : Building Yocto
