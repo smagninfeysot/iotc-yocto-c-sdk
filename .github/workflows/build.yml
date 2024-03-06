@@ -116,7 +116,7 @@ jobs:
     if: always()
     needs:
       [
-        build-docker,
+        build-msc-sm2s-imx8plus,
         test-image,
       ]
     steps:
