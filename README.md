@@ -1,4 +1,4 @@
-![example workflow](https://github.com/smagninfeysot/iotc-yocto-c-sdk/actions/workflows/build.yml/badge.svg)
+[![build](https://github.com/smagninfeysot/iotc-yocto-c-sdk/actions/workflows/build.yml/badge.svg?branch=hardknott)](https://github.com/smagninfeysot/iotc-yocto-c-sdk/actions/workflows/build.yml
 
 # IoT-Connect Yocto Integration
 ***This IoT-Connect connect layer only supports `hardknott`***
