@@ -36,6 +36,10 @@ jobs:
       - name: Check SSH AUTH
         run: |
           echo ${{ env.SSH_AUTH_SOCK }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: network=host
       - name: Build Docker
         run: |
           ssh-keyscan -p 9418 -t rsa msc-git02.msc-ge.com >> ~/.ssh/known_hosts
@@ -44,9 +48,14 @@ jobs:
           git checkout v1.9.0
           sed -i '/COPY rootfs\/home\/.ssh\/id_rsa/d' Dockerfile
           mkdir src
-          docker build -t=msc-ldk-hardknott .
-          docker push localhost:5000/msc-ldk-hardknott
-          cd ..
+      - name:  Build and push to local registry
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: localhost:5000/msc-ldk-hardknott:latest
+      - name : Building Yocto
+        run: |
           export DNS=$(netplan status | grep "DNS Addre"| grep -v "stub" | sed -rn 's/    DNS Addresses: *(.*)/\1/p')
           chmod +x yocto-layers/ci-scripts/build-yocto.sh
           docker run --privileged --dns $DNS -h docker --mount type=bind,src=${{ env.SSH_AUTH_SOCK }},dst=${{ env.SSH_AUTH_SOCK }} --env SSH_AUTH_SOCK -v `pwd`/src:/src -v `pwd`/yocto-layers/:/src/yocto-layers msc-ldk-hardknott /src/yocto-layers/ci-scripts/build-yocto.sh
