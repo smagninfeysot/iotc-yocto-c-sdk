@@ -67,6 +67,9 @@ jobs:
         build-msc-sm2s-imx8plus
       ]
     steps:
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: "Run yocto build"
         run: |
           ls yocto-layers -lrth
