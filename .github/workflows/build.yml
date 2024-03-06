@@ -23,7 +23,7 @@ jobs:
 #            "${{ secrets.AZURE_VM_SUBSCRIPTION_ID }}" \
 #            "${{ secrets.AZURE_VM_RESSOURCE_GROUP_NAME }}" \
 
-  build-docker:
+  build-msc-sm2s-imx8plus:
     runs-on: [self-hosted, build]
     steps:
       - name: Checkout simplecore-tools
