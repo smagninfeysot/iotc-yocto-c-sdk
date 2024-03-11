@@ -43,6 +43,7 @@ jobs:
         run: |
           ssh-keyscan -p 9418 -t rsa msc-git02.msc-ge.com >> ~/.ssh/known_hosts
           git clone ssh://gitolite@msc-git02.msc-ge.com:9418/msc_ol99/docker-msc-ldk
+          ssh-keyscan -t rsa bitbucket.org >> ~/.ssh/known_hosts
           git clone git@bitbucket.org:adeneo-embedded/b0000-internal-pluma-linux-advanced-test-suite.git
           cd docker-msc-ldk
           git checkout v1.11.0
