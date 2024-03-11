@@ -11,7 +11,7 @@ pip3 install sphinx
 ./setup.py --bsp=01047
 cp -r /src/yocto-layers/meta-iotconnect /src/msc-ldk/sources/
 cp -r /src/yocto-layers/meta-myExampleIotconnectLayer /src/msc-ldk/sources/
-cp -r /src/b0000-internal-pluma-linux-advanced-test-suite/meta-lats-kirkstone/ /src/msc-ldk/sources/
+cp -r /src/b0000-internal-pluma-linux-advanced-test-suite/meta-lats/meta-lats-kirkstone/ /src/msc-ldk/sources/
 source sources/yocto.git/oe-init-build-env build/01047
 bitbake-layers add-layer ../../sources/meta-iotconnect/
 bitbake-layers add-layer ../../sources/meta-myExampleIotconnectLayer/
