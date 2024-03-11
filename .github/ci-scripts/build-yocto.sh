@@ -20,4 +20,5 @@ echo -e '\nIMAGE_INSTALL += " iotc-c-sdk"' >> conf/local.conf
 echo -e '\nIMAGE_FEATURES += " ssh-server-openssh"' >> conf/local.conf
 echo -e '\nEXTRA_IMAGE_FEATURES += " ptest-pkgs"' >> conf/local.conf
 echo -e '\nDISTRO_FEATURES += " wayland vulkan pam systemd ptest bluetooth"' >> conf/local.conf
+cat conf/local.conf
 bitbake core-image-minimal
