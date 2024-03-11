@@ -55,29 +55,29 @@ jobs:
           push: true
           tags: localhost:5000/msc-ldk-kirkstone:latest
 
-  build-yocto:
-    runs-on: [self-hosted, build]
-    needs:
-      [
-        build-docker-msc-sm2s-imx8plus
-      ]
-    steps:
-      - uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: "Run yocto build"
-        run: |
-          ls yocto-layers -lrth
-          export DNS=$(netplan status | grep "DNS Addre"| grep -v "stub" | sed -rn 's/    DNS Addresses: *(.*)/\1/p')
-          chmod +x yocto-layers/.github/ci-scripts/build-yocto.sh
-          docker run --privileged --dns $DNS -h docker --mount type=bind,src=${{ env.SSH_AUTH_SOCK }},dst=${{ env.SSH_AUTH_SOCK }} --env SSH_AUTH_SOCK -v `pwd`/src:/src -v `pwd`/yocto-layers/:/src/yocto-layers localhost:5000/msc-ldk-kirkstone /src/yocto-layers/.github/ci-scripts/build-yocto.sh
-      - name: 'Upload artifacts imx-boot'
-        uses: actions/upload-artifact@v4
-        with:
-          name: imx-boot-sm2s-imx8mp-sd-kirkstone.bin-flash_evk
-          path: src/msc-ldk/build/01047/tmp/deploy/images/sm2s-imx8mp/imx-boot-sm2s-imx8mp-sd.bin-flash_evk
-          retention-days: 2
-
+#  build-yocto:
+#    runs-on: [self-hosted, build]
+#    needs:
+#      [
+#        build-docker-msc-sm2s-imx8plus
+#      ]
+#    steps:
+#      - uses: webfactory/ssh-agent@v0.9.0
+#        with:
+#          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+#      - name: "Run yocto build"
+#        run: |
+#          ls yocto-layers -lrth
+#          export DNS=$(netplan status | grep "DNS Addre"| grep -v "stub" | sed -rn 's/    DNS Addresses: *(.*)/\1/p')
+#          chmod +x yocto-layers/.github/ci-scripts/build-yocto.sh
+#          docker run --privileged --dns $DNS -h docker --mount type=bind,src=${{ env.SSH_AUTH_SOCK }},dst=${{ env.SSH_AUTH_SOCK }} --env SSH_AUTH_SOCK -v `pwd`/src:/src -v `pwd`/yocto-layers/:/src/yocto-layers localhost:5000/msc-ldk-kirkstone /src/yocto-layers/.github/ci-scripts/build-yocto.sh
+#      - name: 'Upload artifacts imx-boot'
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: imx-boot-sm2s-imx8mp-sd-kirkstone.bin-flash_evk
+#          path: src/msc-ldk/build/01047/tmp/deploy/images/sm2s-imx8mp/imx-boot-sm2s-imx8mp-sd.bin-flash_evk
+#          retention-days: 2
+#
   build-yocto-with-tests:
     runs-on: [self-hosted, build]
     needs:
