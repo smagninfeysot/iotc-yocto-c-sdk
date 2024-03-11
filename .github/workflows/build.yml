@@ -56,7 +56,7 @@ jobs:
           tags: localhost:5000/msc-ldk-kirkstone:latest
 
   build-yocto:
-    runs-on: [self-hosted]
+    runs-on: [self-hosted, build]
     needs:
       [
         build-docker-msc-sm2s-imx8plus
@@ -79,7 +79,7 @@ jobs:
           retention-days: 2
 
   build-yocto-with-tests:
-    runs-on: [self-hosted]
+    runs-on: [self-hosted, build]
     needs:
       [
         build-docker-msc-sm2s-imx8plus
