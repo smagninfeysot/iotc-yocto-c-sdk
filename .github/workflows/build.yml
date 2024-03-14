@@ -123,14 +123,8 @@ jobs:
       - name: "Flash the board"
         if: env.FLASH == 'true'
         run: |
-          pluma -h
-      - name: "Download new version of the image"
-        uses: actions/download-artifact@v4
-        with:
-          name: core-image-minimal-sm2s-imx8mp-kirkstone.wic
-      - name: "Run Pluma tests"
-        run: |
-          pluma -h
+          cd h0037-iotconnect-sdk-improvements-pluma/
+          pluma -t /home/iotconnect/h0037-iotconnect-sdk-improvements-pluma/conf/pluma_conf_qa.yml -c /home/iotconnect/h0037-iotconnect-sdk-improvements-pluma/yml/plans/lats.yml --verbose --plugin yml/plans/scripts/
 
   clean:
     runs-on: self-hosted
