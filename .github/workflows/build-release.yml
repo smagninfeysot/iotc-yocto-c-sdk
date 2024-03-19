@@ -97,7 +97,7 @@ jobs:
     if: always()
     needs:
       [
-        build-yocto-with-tests
+        build-yocto
       ]
     steps:
       - name: "clean build dir"
