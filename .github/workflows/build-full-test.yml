@@ -3,6 +3,11 @@ name: build
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      tests: 
+        description: running-tests
+        required: false
+        default: "false"
 jobs:
 
 #  start-self-hosted-runner:
