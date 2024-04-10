@@ -117,8 +117,9 @@ jobs:
         if: ${{ github.event.inputs.test-flash == 'false' }}
         uses: actions/download-artifact@v4
         with:
-          name: imx-boot-sm2s-imx8mp-sd-kirkstone.bin-flash_evk
-      - name: "Flash the board"
+          name: core-image-minimal-sm2s-imx8mp-kirkstone.wic
+          path: flash/core-image-minimal-sm2s-imx8mp.wic
+      - name: "TFTP setup and config"
         run: |
           git clone git@bitbucket.org:adeneo-embedded/h0037-iotconnect-sdk-improvements-pluma.git
           cd h0037-iotconnect-sdk-improvements-pluma
@@ -136,8 +137,8 @@ jobs:
           sed -i 's/SSH\_TARGET\=root\@10.91.1.138/SSH\_TARGET\=root\@10.103.1.132/g' tftp-flash-device.sh
           sed -i 's/timeout: 120/timeout: 600/g' tftp-install.yml
           sed -i 's/should_fail: true/\#should_fail: true/g' tftp-install.yml
-#cd ../flash
-#          gzip -v core-image-minimal-sm2s-imx8mp.wic
+          cd ../flash
+          gzip -v core-image-minimal-sm2s-imx8mp.wic
       - name: "TFTP Flashing"
         continue-on-error: true
         run: |
@@ -174,6 +175,7 @@ jobs:
       - name: "clean build dir"
         run: |
           rm -rf h0037-iotconnect-sdk-improvements-pluma/
+          rm -rf flash/*
 
  # stop-self-hosted-runner:
  #   runs-on: ubuntu-latest
