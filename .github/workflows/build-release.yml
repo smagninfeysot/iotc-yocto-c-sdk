@@ -127,7 +127,7 @@ jobs:
           sed -i 's/ttyS0/ttyUSB0/g' boards/sm2s-imx8mp/target.yml
           sed -i 's/ttyS0/ttyUSB0/g' boards/sm2s-imx8mp/target.yml
           sed -i 's/target: 10\.91\.1\.133/target: 10.103.1.132/g' boards/sm2s-imx8mp/target.yml
-          sed -i 's/TOPDIR=\/opt\/actions-runner\/_work\/iotc-yocto-c-sdk\/iotc-yocto-c-sdk/g' tftp-flash-device.sh
+          sed -i 's/TOPDIR\=\/home\/pluma\/Projects/TOPDIR=\/opt\/actions-runner\/_work\/iotc-yocto-c-sdk\/iotc-yocto-c-sdk/g' tftp-flash-device.sh
           sed -i 's/BOARDDIR_YOCTO\=\$TOPDIR\/Iot-Connect\/msc-ldk\/build\/01047/BOARDDIR_YOCTO=\$TOPDIR\/artifacts/g' tftp-flash-device.sh
           sed -i 's/BOARDDIR\_PLUMA\=\$TOPDIR\/h0037-iotconnect-sdk-improvements-pluma\/boards/BOARDDIR_PLUMA=\$TOPDIR\/h0037-iotconnect-sdk-improvements-pluma/g' tftp-flash-device.sh
           sed -i 's/DEPLOYDIR\=\$BOARDDIR\_YOCTO\/tmp\/deploy\/images\/\$MACHINE/DEPLOYDIR\=\$BOARDDIR\_YOCTO/g' tftp-flash-device.sh
