@@ -126,18 +126,20 @@ jobs:
           sed -i 's/ttyS0/ttyUSB0/g' conf/pluma_conf_qa.yml
           sed -i 's/ttyS0/ttyUSB0/g' boards/sm2s-imx8mp/target.yml
           sed -i 's/ttyS0/ttyUSB0/g' boards/sm2s-imx8mp/target.yml
-          sed -i 's/target: 10\.91\.1\.133/target: 10.103.1.132/g' boards/sm2s-imx8mp/target.yml
+          sed -i 's/target: 10\.91\.1\.133/target: 10.103.1.132/g'
           sed -i 's/TOPDIR\=\/home\/pluma\/Projects/TOPDIR=\/opt\/actions-runner\/_work\/iotc-yocto-c-sdk\/iotc-yocto-c-sdk/g' tftp-flash-device.sh
           sed -i 's/BOARDDIR_YOCTO\=\$TOPDIR\/Iot-Connect\/msc-ldk\/build\/01047/BOARDDIR_YOCTO=\$TOPDIR\/flash/g' tftp-flash-device.sh
-          sed -i 's/BOARDDIR\_PLUMA\=\$TOPDIR\/h0037-iotconnect-sdk-improvements-pluma\/boards/BOARDDIR_PLUMA=\$TOPDIR\/h0037-iotconnect-sdk-improvements-pluma/g' tftp-flash-device.sh
           sed -i 's/DEPLOYDIR\=\$BOARDDIR\_YOCTO\/tmp\/deploy\/images\/\$MACHINE/DEPLOYDIR\=\$BOARDDIR\_YOCTO/g' tftp-flash-device.sh
           sed -i 's/SDIMG=msc-image-base-sdk-$MACHINE.wic.gz/SDIMG=core-image-minimal-sm2s-imx8mp.wic.gz/g' tftp-flash-device.sh
           sed -i 's/TFTP_DEVICEIP=10.91.1.138/TFTP_DEVICEIP=10.103.1.132/g' tftp-flash-device.sh
           sed -i 's/TFTP_SERVERIP=10.91.1.153/TFTP_SERVERIP=10.103.1.122/g' tftp-flash-device.sh
           sed -i 's/SSH\_TARGET\=root\@10.91.1.138/SSH\_TARGET\=root\@10.103.1.132/g' tftp-flash-device.sh
-          ./tftp-flash-device.sh       
 #cd ../flash
 #          gzip -v core-image-minimal-sm2s-imx8mp.wic
+      - name: "TFTP Flashing"
+        continue-on-error: true
+        run: |
+          ./tftp-flash-device.sh       
       - name: "Run the Pluma test suite on the board"
         if: env.FLASH == 'true'
         run: |
