@@ -105,10 +105,10 @@ jobs:
 
   test-image:
     runs-on: [self-hosted, rpi]
-#    needs:
-#      [
-#        build-yocto-with-tests
-#      ]
+    needs:
+      [
+        build-yocto
+      ]
     steps:
       - uses: webfactory/ssh-agent@v0.9.0
         with:
