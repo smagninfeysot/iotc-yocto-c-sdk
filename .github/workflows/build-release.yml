@@ -149,7 +149,7 @@ jobs:
 
   clean:
     runs-on: self-hosted
-    if: ${{ github.event.inputs.test-flash == 'false' }}
+    if: always()
     needs:
       [
         build-yocto
