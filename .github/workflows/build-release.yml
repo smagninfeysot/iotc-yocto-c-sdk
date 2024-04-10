@@ -33,7 +33,7 @@ jobs:
 #            "${{ secrets.AZURE_VM_SUBSCRIPTION_ID }}" \
 #            "${{ secrets.AZURE_VM_RESSOURCE_GROUP_NAME }}" \
   build-docker-msc-sm2s-imx8plus:
-    if: github.event.inputs.test-flash == "false"
+    if: ${{ github.event.inputs.test-flash == 'false' }}
     runs-on: [self-hosted, build]
     steps:
       - name: Checkout simplecore-tools
@@ -64,7 +64,7 @@ jobs:
           tags: localhost:5000/msc-ldk-kirkstone:latest
 
   build-yocto:
-    if: github.event.inputs.test-flash == "false"
+    if: ${{ github.event.inputs.test-flash == 'false' }}
     runs-on: [self-hosted, build]
     needs:
       [
@@ -111,7 +111,7 @@ jobs:
       ]
     steps:
       - name: "Download new firmware for the board"
-        if: env.FLASH == 'true' && github.event.inputs.test-flash == "false"
+        if: ${{ github.event.inputs.test-flash == 'false' }}
         uses: actions/download-artifact@v4
         with:
           name: imx-boot-sm2s-imx8mp-sd-kirkstone.bin-flash_evk
