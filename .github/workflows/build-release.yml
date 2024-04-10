@@ -162,6 +162,13 @@ jobs:
           cd ../
           rm -rf iotc-yocto-c-sdk/
 
+  clean-rpi:
+    runs-on: [self-hosted, rpi]
+    steps:
+      - name: "clean build dir"
+        run: |
+          rm -rf h0037-iotconnect-sdk-improvements-pluma/
+
  # stop-self-hosted-runner:
  #   runs-on: ubuntu-latest
  #   needs:
