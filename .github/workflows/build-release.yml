@@ -139,6 +139,7 @@ jobs:
       - name: "TFTP Flashing"
         continue-on-error: true
         run: |
+          cd h0037-iotconnect-sdk-improvements-pluma/
           ./tftp-flash-device.sh       
       - name: "Run the Pluma test suite on the board"
         if: env.FLASH == 'true'
