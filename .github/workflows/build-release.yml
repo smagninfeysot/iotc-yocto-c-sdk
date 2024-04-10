@@ -120,7 +120,6 @@ jobs:
           name: imx-boot-sm2s-imx8mp-sd-kirkstone.bin-flash_evk
       - name: "Flash the board"
         run: |
-          mkdir flash
           git clone git@bitbucket.org:adeneo-embedded/h0037-iotconnect-sdk-improvements-pluma.git
           cd h0037-iotconnect-sdk-improvements-pluma
           sed -i 's/ttyS0/ttyUSB0/g' conf/pluma_conf_ci.yml
