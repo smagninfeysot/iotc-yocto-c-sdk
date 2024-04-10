@@ -105,10 +105,10 @@ jobs:
 
   test-image:
     runs-on: [self-hosted, rpi]
-    needs:
-      [
-        build-yocto-with-tests
-      ]
+#    needs:
+#      [
+#        build-yocto-with-tests
+#      ]
     steps:
       - name: "Download new firmware for the board"
         if: ${{ github.event.inputs.test-flash == 'false' }}
