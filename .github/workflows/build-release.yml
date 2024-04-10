@@ -110,6 +110,9 @@ jobs:
 #        build-yocto-with-tests
 #      ]
     steps:
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: "Download new firmware for the board"
         if: ${{ github.event.inputs.test-flash == 'false' }}
         uses: actions/download-artifact@v4
