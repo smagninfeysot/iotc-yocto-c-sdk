@@ -143,7 +143,6 @@ jobs:
           cd h0037-iotconnect-sdk-improvements-pluma/
           ./tftp-flash-device.sh       
       - name: "Run the Pluma test suite on the board"
-        if: env.FLASH == 'true'
         run: |
           cd h0037-iotconnect-sdk-improvements-pluma/
           pluma -t /home/iotconnect/h0037-iotconnect-sdk-improvements-pluma/conf/pluma_conf_qa.yml -c /home/iotconnect/h0037-iotconnect-sdk-improvements-pluma/yml/plans/lats.yml --verbose --plugin yml/plans/scripts/
