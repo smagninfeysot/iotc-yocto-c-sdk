@@ -151,6 +151,8 @@ jobs:
       - name: "Run the Pluma test suite on the board"
         run: |
           cd h0037-iotconnect-sdk-improvements-pluma/
+          sed -i 's/host_interface: enp0s31f6/host_interface: eth0/g' yml/plans/lats.yml
+          sed -i 's/device_interface: eth2/device_interface: eth1/g' yml/plans/lats.yml
           mkdir yml/plans/scripts
           pluma -t conf/pluma_conf_ci.yml -c yml/plans/lats.yml --verbose --plugin yml/plans/scripts/
 
