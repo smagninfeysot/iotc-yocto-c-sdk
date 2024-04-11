@@ -12,6 +12,10 @@ on:
         description: "Run only flash for test purposes only"
         required: false
         default: "false"
+      build-docker:
+        description: "Build a new docker image to run the yocto build"
+        required: false
+        default: "false"
 jobs:
 
 #  start-self-hosted-runner:
@@ -138,6 +142,7 @@ jobs:
           sed -i 's/should_fail: true/\#should_fail: true/g' tftp-install.yml
           cd ../flash/core-image-minimal-sm2s-imx8mp.wic/
           gzip -v core-image-minimal-sm2s-imx8mp.wic
+          cp  core-image-minimal-sm2s-imx8mp.wic.gz ..
       - name: "TFTP Flashing"
         continue-on-error: true
         run: |
@@ -146,7 +151,7 @@ jobs:
       - name: "Run the Pluma test suite on the board"
         run: |
           cd h0037-iotconnect-sdk-improvements-pluma/
-          pluma -t /home/iotconnect/h0037-iotconnect-sdk-improvements-pluma/conf/pluma_conf_qa.yml -c /home/iotconnect/h0037-iotconnect-sdk-improvements-pluma/yml/plans/lats.yml --verbose --plugin yml/plans/scripts/
+          pluma -t conf/pluma_conf_qa.yml -c yml/plans/lats.yml --verbose --plugin yml/plans/scripts/
 
   clean:
     runs-on: [self-hosted, build]
