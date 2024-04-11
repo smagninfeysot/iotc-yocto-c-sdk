@@ -151,7 +151,7 @@ jobs:
       - name: "Run the Pluma test suite on the board"
         run: |
           cd h0037-iotconnect-sdk-improvements-pluma/
-          pluma -t conf/pluma_conf_qa.yml -c yml/plans/lats.yml --verbose --plugin yml/plans/scripts/
+          pluma -t conf/pluma_conf_ci.yml -c yml/plans/lats.yml --verbose --plugin yml/plans/scripts/
 
   clean:
     runs-on: [self-hosted, build]
