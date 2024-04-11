@@ -129,7 +129,7 @@ jobs:
           sed -i 's/ttyS0/ttyUSB0/g' boards/sm2s-imx8mp/target.yml
           sed -i 's/target: 10\.91\.1\.133/target: 10.103.1.132/g' boards/sm2s-imx8mp/target.yml
           sed -i 's/TOPDIR\=\/home\/pluma\/Projects/TOPDIR=\/opt\/actions-runner\/_work\/iotc-yocto-c-sdk\/iotc-yocto-c-sdk/g' tftp-flash-device.sh
-          sed -i 's/BOARDDIR_YOCTO\=\$TOPDIR\/Iot-Connect\/msc-ldk\/build\/01047/BOARDDIR_YOCTO=\$TOPDIR\/flash/g' tftp-flash-device.sh
+          sed -i 's/BOARDDIR_YOCTO\=\$TOPDIR\/Iot-Connect\/msc-ldk\/build\/01047/BOARDDIR_YOCTO=\$TOPDIR\/flash\/core-image-minimal-sm2s-imx8mp.wic/g' tftp-flash-device.sh
           sed -i 's/DEPLOYDIR\=\$BOARDDIR\_YOCTO\/tmp\/deploy\/images\/\$MACHINE/DEPLOYDIR\=\$BOARDDIR\_YOCTO/g' tftp-flash-device.sh
           sed -i 's/SDIMG=msc-image-base-sdk-$MACHINE.wic.gz/SDIMG=core-image-minimal-sm2s-imx8mp.wic.gz/g' tftp-flash-device.sh
           sed -i 's/TFTP_DEVICEIP=10.91.1.138/TFTP_DEVICEIP=10.103.1.132/g' tftp-flash-device.sh
@@ -137,7 +137,7 @@ jobs:
           sed -i 's/SSH\_TARGET\=root\@10.91.1.138/SSH\_TARGET\=root\@10.103.1.132/g' tftp-flash-device.sh
           sed -i 's/timeout: 120/timeout: 600/g' tftp-install.yml
           sed -i 's/should_fail: true/\#should_fail: true/g' tftp-install.yml
-          cd ../flash
+          cd ../flash/core-image-minimal-sm2s-imx8mp.wic/
           gzip -v core-image-minimal-sm2s-imx8mp.wic
       - name: "TFTP Flashing"
         continue-on-error: true
