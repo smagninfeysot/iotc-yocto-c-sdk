@@ -114,7 +114,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: "Download new firmware for the board"
-        if: ${{ github.event.inputs.test-flash == 'false' }}
         uses: actions/download-artifact@v4
         with:
           name: core-image-minimal-sm2s-imx8mp-kirkstone.wic
@@ -167,6 +166,7 @@ jobs:
 
   clean-rpi:
     runs-on: [self-hosted, rpi]
+    if: always()
     needs:
       [
         test-image
