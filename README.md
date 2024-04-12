@@ -1,4 +1,4 @@
-[![build](https://github.com/smagninfeysot/iotc-yocto-c-sdk/actions/workflows/build.yml/badge.svg?branch=kirkstone)](https://github.com/smagninfeysot/iotc-yocto-c-sdk/actions/workflows/build.yml)
+[![build](https://github.com/smagninfeysot/iotc-yocto-c-sdk/actions/workflows/build-release.yml/badge.svg?branch=kirkstone)](https://github.com/smagninfeysot/iotc-yocto-c-sdk/actions/workflows/build-release.yml)
 
 # IoT-Connect Yocto Integration
 ***This IoT-Connect C SDK layer for `kirkstone`***
