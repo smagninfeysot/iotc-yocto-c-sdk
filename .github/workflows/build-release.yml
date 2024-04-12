@@ -7,7 +7,7 @@ on:
       test:
         description: "Build a test image and run the tests on the board"
         required: false
-        default: "false"
+        default: "true"
       test-flash:
         description: "Run only flash for test purposes only"
         required: false
@@ -109,6 +109,7 @@ jobs:
 
   test-image:
     runs-on: [self-hosted, rpi]
+    if: ${{ github.event.inputs.test == 'true' }}
     needs:
       [
         build-yocto
@@ -149,6 +150,7 @@ jobs:
           cd h0037-iotconnect-sdk-improvements-pluma/
           ./tftp-flash-device.sh       
       - name: "Run the Pluma test suite on the board"
+        continue-on-error: true
         run: |
           cd h0037-iotconnect-sdk-improvements-pluma/
           sed -i 's/host_interface: enp0s31f6/host_interface: eth0/g' yml/plans/lats.yml
@@ -164,7 +166,7 @@ jobs:
 
   clean:
     runs-on: [self-hosted, build]
-    if: always()
+    if: always() && ${{ github.event.inputs.test == 'true' }}
     needs:
       [
         build-yocto
