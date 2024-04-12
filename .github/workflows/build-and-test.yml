@@ -150,14 +150,6 @@ jobs:
         run: |
           cd h0037-iotconnect-sdk-improvements-pluma/
           ./tftp-flash-device.sh       
-  test-run-image:
-    runs-on: [self-hosted, rpi]
-    if: ${{ github.event.inputs.test == 'true' }}
-    needs:
-      [
-        test-image
-      ]
-    steps:
       - name: "Run the Pluma test suite on the board"
         continue-on-error: true
         run: |
@@ -194,7 +186,7 @@ jobs:
     if: always()
     needs:
       [
-        test-run-image
+        test-image
       ]
     steps:
       - name: "clean build dir"
