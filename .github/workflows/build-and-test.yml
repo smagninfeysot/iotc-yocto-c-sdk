@@ -141,6 +141,7 @@ jobs:
           sed -i 's/SSH\_TARGET\=root\@10.91.1.138/SSH\_TARGET\=root\@10.103.1.132/g' tftp-flash-device.sh
           sed -i 's/timeout: 120/timeout: 600/g' tftp-install.yml
           sed -i 's/should_fail: true/\#should_fail: true/g' tftp-install.yml
+          sed -i 's/tftpdstdp: 6969/tftpdstp: 69/g' tftp-install.yml
           cd ../flash/core-image-minimal-sm2s-imx8mp.wic/
           gzip -v core-image-minimal-sm2s-imx8mp.wic
           cp  core-image-minimal-sm2s-imx8mp.wic.gz ..
