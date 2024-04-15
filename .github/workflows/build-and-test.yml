@@ -156,6 +156,7 @@ jobs:
         with:
           max_attempts: 3
           retry_on: error
+          timeout_seconds: 65
           command: |
             cd h0037-iotconnect-sdk-improvements-pluma/
             sed -i 's/host_interface: enp0s31f6/host_interface: eth0/g' yml/plans/lats.yml
