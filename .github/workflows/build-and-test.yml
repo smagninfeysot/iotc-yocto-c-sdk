@@ -52,6 +52,17 @@ jobs:
         with:
           driver-opts: network=host
       - name: Prepare Docker Image
+        if: github.ref_name == 'kirkstone'
+        run: |
+          ssh-keyscan -p 9418 -t rsa msc-git02.msc-ge.com >> ~/.ssh/known_hosts
+          git clone ssh://gitolite@msc-git02.msc-ge.com:9418/msc_ol99/docker-msc-ldk
+          ssh-keyscan -t rsa bitbucket.org >> ~/.ssh/known_hosts
+          cd docker-msc-ldk
+          git checkout v1.11.0
+          sed -i '/COPY rootfs\/home\/.ssh\/id_rsa/d' Dockerfile
+          mkdir src
+      - name: Prepare Docker Image
+        if: github.ref_name == 'hardknott'
         run: |
           ssh-keyscan -p 9418 -t rsa msc-git02.msc-ge.com >> ~/.ssh/known_hosts
           git clone ssh://gitolite@msc-git02.msc-ge.com:9418/msc_ol99/docker-msc-ldk
@@ -83,7 +94,7 @@ jobs:
           ls yocto-layers -lrth
           export DNS=$(netplan status | grep "DNS Addre"| grep -v "stub" | sed -rn 's/    DNS Addresses: *(.*)/\1/p')
           chmod +x yocto-layers/.github/ci-scripts/build-yocto.sh
-          docker run --privileged --dns $DNS -h docker --mount type=bind,src=${{ env.SSH_AUTH_SOCK }},dst=${{ env.SSH_AUTH_SOCK }} --env SSH_AUTH_SOCK -v `pwd`/src:/src -v `pwd`/yocto-layers/:/src/yocto-layers localhost:5000/msc-ldk-kirkstone /src/yocto-layers/.github/ci-scripts/build-yocto.sh
+          docker run --privileged --dns $DNS -h docker --mount type=bind,src=${{ env.SSH_AUTH_SOCK }},dst=${{ env.SSH_AUTH_SOCK }} --env SSH_AUTH_SOCK -v `pwd`/src:/src -v `pwd`/yocto-layers/:/src/yocto-layers localhost:5000/msc-ldk-kirkstone "/src/yocto-layers/.github/ci-scripts/build-yocto.sh test"
 #
 #      - uses: hkusu/s3-upload-action@v2
 #        with:
@@ -172,7 +183,7 @@ jobs:
 
   clean:
     runs-on: [self-hosted, build]
-    if: always() && ${{ github.event.inputs.test == 'true' }}
+    if: always()
     needs:
       [
         build-yocto
