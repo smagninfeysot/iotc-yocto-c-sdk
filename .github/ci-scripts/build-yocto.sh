@@ -13,23 +13,23 @@ pip3 install sphinx
 cp -r /src/yocto-layers/meta-iotconnect /src/msc-ldk/sources/
 cp -r /src/yocto-layers/meta-myExampleIotconnectLayer /src/msc-ldk/sources/
 
-if [ $1 = "test" ]; then
+#if [ $1 = "test" ]; then
   ls ../b0000-internal-pluma-linux-advanced-test-suite/meta-lats/meta-lats-kirkstone/
   cp -r /src/b0000-internal-pluma-linux-advanced-test-suite/meta-lats/meta-lats-kirkstone/ /src/msc-ldk/sources/
-fi
+#fi
 
 source sources/yocto.git/oe-init-build-env build/01047
 bitbake-layers add-layer ../../sources/meta-iotconnect/
 bitbake-layers add-layer ../../sources/meta-myExampleIotconnectLayer/
-if [ $1 = "test" ]; then
+#if [ $1 = "test" ]; then
   bitbake-layers add-layer ../../sources/meta-lats-kirkstone/
   echo -e '\nIMAGE_INSTALL += " ltp rng-tools iotc-c-sdk"' >> conf/local.conf
   echo -e '\nIMAGE_FEATURES += " ssh-server-openssh"' >> conf/local.conf
   echo -e '\nEXTRA_IMAGE_FEATURES += " ptest-pkgs"' >> conf/local.conf
   echo -e '\nDISTRO_FEATURES += " pam systemd wifi ptest bluetooth"' >> conf/local.conf
-else
-  echo -e '\nIMAGE_INSTALL += " iotc-c-sdk"' >> conf/local.conf
-fi
+#else
+#  echo -e '\nIMAGE_INSTALL += " iotc-c-sdk"' >> conf/local.conf
+#fi
 
 cat conf/local.conf
 bitbake core-image-minimal
