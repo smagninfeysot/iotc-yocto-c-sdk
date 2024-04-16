@@ -115,7 +115,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: core-image-minimal-sm2s-imx8mp-kirkstone.wic
-          path: src/msc-ldk/build/01047/tmp/deploy/images/sm2s-imx8mp/core-image-minimal-sm2s-imx8mp.wic
+          path: src/msc-ldk/build/01047/tmp/deploy/images/sm2s-imx8mp/msc-image-base-sdk-sm2s-imx8mp.wic
           retention-days: 2
 
   test-image:
