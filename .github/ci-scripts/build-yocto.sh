@@ -14,7 +14,6 @@ cp -r /src/yocto-layers/meta-iotconnect /src/msc-ldk/sources/
 cp -r /src/yocto-layers/meta-myExampleIotconnectLayer /src/msc-ldk/sources/
 
 #if [ $1 = "test" ]; then
-  ls ../b0000-internal-pluma-linux-advanced-test-suite/meta-lats/meta-lats-kirkstone/
   cp -r /src/b0000-internal-pluma-linux-advanced-test-suite/meta-lats/meta-lats-kirkstone/ /src/msc-ldk/sources/
 #fi
 
@@ -32,5 +31,4 @@ bitbake-layers add-layer ../../sources/meta-myExampleIotconnectLayer/
 #fi
 
 cat conf/local.conf
-bitbake core-image-minimal
-
+bitbake msc-image-base-sdk

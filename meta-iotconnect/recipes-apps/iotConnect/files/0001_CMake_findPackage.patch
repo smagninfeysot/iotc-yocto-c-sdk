@@ -1,12 +1,11 @@
 diff --git a/iotc-generic-c-sdk/CMakeLists.txt b/iotc-generic-c-sdk/CMakeLists.txt
-index a3d45c0..17d38c3 100644
+index 03cf589..0f6ad93 100644
 --- a/iotc-generic-c-sdk/CMakeLists.txt
 +++ b/iotc-generic-c-sdk/CMakeLists.txt
-@@ -84,15 +84,7 @@ ELSE ()
-     )
+@@ -43,14 +43,7 @@ ELSE ()
+     target_link_libraries(iotc-c-generic-sdk paho-mqtt3cs)
  ENDIF ()
  
--
 -IF (CMAKE_TOOLCHAIN_FILE)
 -    # not the best way to detect VCPKG, but we'll go with that
 -    find_package(CURL CONFIG REQUIRED)
@@ -19,6 +18,3 @@ index a3d45c0..17d38c3 100644
  
  target_link_libraries(iotc-c-generic-sdk cjson)
  
--- 
-2.25.1
-
