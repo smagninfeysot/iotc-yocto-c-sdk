@@ -32,5 +32,5 @@ bitbake-layers add-layer ../../sources/meta-myExampleIotconnectLayer/
 #fi
 
 cat conf/local.conf
-bitbake core-image-base
+bitbake core-image-minimal
 
