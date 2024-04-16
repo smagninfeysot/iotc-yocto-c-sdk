@@ -32,5 +32,5 @@ bitbake-layers add-layer ../../sources/meta-myExampleIotconnectLayer/
 #fi
 
 cat conf/local.conf
-bitbake msc-image-iotc-sdk
+bitbake msc-image-base-sdk
 
