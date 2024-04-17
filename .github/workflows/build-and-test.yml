@@ -125,19 +125,19 @@ jobs:
   test-image:
     runs-on: [self-hosted, rpi]
     if: ${{ github.event.inputs.test == 'true' }}
-#    needs:
-#      [
-#        build-yocto
-#      ]
+    needs:
+      [
+        build-yocto
+      ]
     steps:
       - uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
- #     - name: "Download new firmware for the board"
- #       uses: actions/download-artifact@v4
- #       with:
- #         name: core-image-base-sm2s-imx8mp-kirkstone.wic
- #         path: flash/core-image-base-sm2s-imx8mp.wic
+      - name: "Download new firmware for the board"
+        uses: actions/download-artifact@v4
+        with:
+          name: core-image-base-sm2s-imx8mp-kirkstone.wic
+          path: flash/core-image-base-sm2s-imx8mp.wic
       - name: "TFTP setup and config"
         run: |
           git clone git@bitbucket.org:adeneo-embedded/h0037-iotconnect-sdk-improvements-pluma.git
@@ -158,9 +158,9 @@ jobs:
           sed -i 's/timeout: 120/timeout: 600/g' tftp-install.yml
           sed -i 's/should_fail: true/\#should_fail: true/g' tftp-install.yml
           sed -i 's/tftpdstdp: 6969/tftpdstp: 69/g' tftp-install.yml
-          #cd ../flash/core-image-base-sm2s-imx8mp.wic/
-          #gzip -v core-image-base-sm2s-imx8mp.wic
-          #mv core-image-base-imx8mp.wic.gz ..
+          cd ../flash/core-image-base-sm2s-imx8mp.wic/
+          gzip -v core-image-base-sm2s-imx8mp.wic
+          mv core-image-base-imx8mp.wic.gz ..
       - name: "TFTP Flashing"
         continue-on-error: true
         run: |
