@@ -167,21 +167,16 @@ jobs:
           cd h0037-iotconnect-sdk-improvements-pluma/
           ./tftp-flash-device.sh       
       - name: "Run the Pluma test suite on the board"
-        uses: nick-fields/retry@v3.0.0
         continue-on-error: true
-        with:
-          max_attempts: 3
-          retry_on: error
-          timeout_seconds: 65
-          command: |
-            cd h0037-iotconnect-sdk-improvements-pluma/
-            sed -i 's/host_interface: enp0s31f6/host_interface: eth0/g' yml/plans/lats.yml
-            sed -i 's/device_interface: eth2/device_interface: eth1/g' yml/plans/lats.yml
-            mkdir yml/plans/scripts
-            echo "root" >> pico.txt
-            echo "" >> pico.txt
-            cat pico.txt | picocom -qrx 1000 -b 115200 /dev/ttyUSB0
-            pluma -t conf/pluma_conf_ci.yml -c yml/plans/lats.yml --verbose --plugin yml/plans/scripts/
+        run: |
+          cd h0037-iotconnect-sdk-improvements-pluma/
+          sed -i 's/host_interface: enp0s31f6/host_interface: eth0/g' yml/plans/lats.yml
+          sed -i 's/device_interface: eth2/device_interface: eth1/g' yml/plans/lats.yml
+          mkdir yml/plans/scripts
+          echo "root" >> pico.txt
+          echo "" >> pico.txt
+          cat pico.txt | picocom -qrx 1000 -b 115200 /dev/ttyUSB0
+          pluma -t conf/pluma_conf_ci.yml -c yml/plans/lats.yml --verbose --plugin yml/plans/scripts/
       - name: 'Upload artifacts logs'
         uses: actions/upload-artifact@v4
         with:
