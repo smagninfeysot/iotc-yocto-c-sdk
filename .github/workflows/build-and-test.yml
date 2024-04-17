@@ -157,9 +157,9 @@ jobs:
           sed -i 's/timeout: 120/timeout: 600/g' tftp-install.yml
           sed -i 's/should_fail: true/\#should_fail: true/g' tftp-install.yml
           sed -i 's/tftpdstdp: 6969/tftpdstp: 69/g' tftp-install.yml
-          cd ../flash/core-image-base-sm2s-imx8mp.wic/
-          gzip -v core-image-base-sm2s-imx8mp.wic
-          mv core-image-base-imx8mp.wic.gz ..
+          #cd ../flash/core-image-base-sm2s-imx8mp.wic/
+          #gzip -v core-image-base-sm2s-imx8mp.wic
+          #mv core-image-base-imx8mp.wic.gz ..
       - name: "TFTP Flashing"
         continue-on-error: true
         run: |
