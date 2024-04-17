@@ -16,6 +16,10 @@ on:
         description: "Build a new docker image to run the yocto build"
         required: false
         default: "false"
+      yocto-image:
+        description: "The yocto image to build"
+        required: false
+        default: "core-image-base"
 jobs:
 
 #  start-self-hosted-runner:
@@ -155,7 +159,6 @@ jobs:
           sed -i 's/tftpdstdp: 6969/tftpdstp: 69/g' tftp-install.yml
           cd ../flash/core-image-base-sm2s-imx8mp.wic/
           gzip -v core-image-base-sm2s-imx8mp.wic
-          rm core-image-base-sm2s-imx8mp.wic
           mv core-image-base-imx8mp.wic.gz ..
       - name: "TFTP Flashing"
         continue-on-error: true
