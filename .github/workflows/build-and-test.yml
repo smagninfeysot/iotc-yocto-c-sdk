@@ -114,8 +114,8 @@ jobs:
       - name: 'Upload artifacts image'
         uses: actions/upload-artifact@v4
         with:
-          name: core-image-minimal-sm2s-imx8mp-kirkstone.wic
-          path: src/msc-ldk/build/01047/tmp/deploy/images/sm2s-imx8mp/msc-image-base-sdk-sm2s-imx8mp.wic
+          name: core-image-base-sm2s-imx8mp-kirkstone.wic
+          path: src/msc-ldk/build/01047/tmp/deploy/images/sm2s-imx8mp/core-image-base-sm2s-imx8mp.wic
           retention-days: 2
 
   test-image:
@@ -132,8 +132,8 @@ jobs:
       - name: "Download new firmware for the board"
         uses: actions/download-artifact@v4
         with:
-          name: core-image-minimal-sm2s-imx8mp-kirkstone.wic
-          path: flash/core-image-minimal-sm2s-imx8mp.wic
+          name: core-image-base-sm2s-imx8mp-kirkstone.wic
+          path: flash/core-image-base-sm2s-imx8mp.wic
       - name: "TFTP setup and config"
         run: |
           git clone git@bitbucket.org:adeneo-embedded/h0037-iotconnect-sdk-improvements-pluma.git
@@ -144,18 +144,19 @@ jobs:
           sed -i 's/ttyS0/ttyUSB0/g' boards/sm2s-imx8mp/target.yml
           sed -i 's/target: 10\.91\.1\.133/target: 10.103.1.106/g' boards/sm2s-imx8mp/target.yml
           sed -i 's/TOPDIR\=\/home\/pluma\/Projects/TOPDIR=\/opt\/actions-runner\/_work\/iotc-yocto-c-sdk\/iotc-yocto-c-sdk/g' tftp-flash-device.sh
-          sed -i 's/BOARDDIR_YOCTO\=\$TOPDIR\/Iot-Connect\/msc-ldk\/build\/01047/BOARDDIR_YOCTO=\$TOPDIR\/flash\/core-image-minimal-sm2s-imx8mp.wic/g' tftp-flash-device.sh
+          sed -i 's/BOARDDIR_YOCTO\=\$TOPDIR\/Iot-Connect\/msc-ldk\/build\/01047/BOARDDIR_YOCTO=\$TOPDIR\/flash\/core-image-base-sm2s-imx8mp.wic/g' tftp-flash-device.sh
           sed -i 's/DEPLOYDIR\=\$BOARDDIR\_YOCTO\/tmp\/deploy\/images\/\$MACHINE/DEPLOYDIR\=\$BOARDDIR\_YOCTO/g' tftp-flash-device.sh
-          sed -i 's/SDIMG=msc-image-base-sdk-$MACHINE.wic.gz/SDIMG=core-image-minimal-sm2s-imx8mp.wic.gz/g' tftp-flash-device.sh
+          sed -i 's/SDIMG=msc-image-base-sdk-$MACHINE.wic.gz/SDIMG=core-image-base-sm2s-imx8mp.wic.gz/g' tftp-flash-device.sh
           sed -i 's/TFTP_DEVICEIP=10.91.1.138/TFTP_DEVICEIP=10.103.1.106/g' tftp-flash-device.sh
           sed -i 's/TFTP_SERVERIP=10.91.1.153/TFTP_SERVERIP=10.103.1.122/g' tftp-flash-device.sh
           sed -i 's/SSH\_TARGET\=root\@10.91.1.138/SSH\_TARGET\=root\@10.103.1.106/g' tftp-flash-device.sh
           sed -i 's/timeout: 120/timeout: 600/g' tftp-install.yml
           sed -i 's/should_fail: true/\#should_fail: true/g' tftp-install.yml
           sed -i 's/tftpdstdp: 6969/tftpdstp: 69/g' tftp-install.yml
-          cd ../flash/core-image-minimal-sm2s-imx8mp.wic/
-          gzip -v core-image-minimal-sm2s-imx8mp.wic
-          cp  core-image-minimal-sm2s-imx8mp.wic.gz ..
+          cd ../flash/core-image-base-sm2s-imx8mp.wic/
+          gzip -v core-image-base-sm2s-imx8mp.wic
+          rm core-image-base-sm2s-imx8mp.wic
+          mv core-image-base-imx8mp.wic.gz ..
       - name: "TFTP Flashing"
         continue-on-error: true
         run: |
