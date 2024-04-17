@@ -141,8 +141,8 @@ jobs:
       - name: "TFTP setup and config"
         run: |
           git clone git@bitbucket.org:adeneo-embedded/h0037-iotconnect-sdk-improvements-pluma.git
-          git checkout ci-test
           cd h0037-iotconnect-sdk-improvements-pluma
+          git checkout ci-test
           sed -i 's/ttyS0/ttyUSB0/g' conf/pluma_conf_ci.yml
           sed -i 's/ttyS0/ttyUSB0/g' conf/pluma_conf_qa.yml
           sed -i 's/ttyS0/ttyUSB0/g' boards/sm2s-imx8mp/target.yml
