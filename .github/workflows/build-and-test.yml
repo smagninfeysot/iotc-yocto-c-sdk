@@ -161,7 +161,7 @@ jobs:
           sed -i 's/tftpdstdp: 6969/tftpdstp: 69/g' tftp-install.yml
           cd ../flash/core-image-base-sm2s-imx8mp.wic/
           gzip -v core-image-base-sm2s-imx8mp.wic
-          mv core-image-base-imx8mp.wic.gz ..
+          mv core-image-base-sm2s-imx8mp.wic.gz ..
       - name: "TFTP Flashing"
         continue-on-error: true
         run: |
