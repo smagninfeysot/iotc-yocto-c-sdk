@@ -124,6 +124,7 @@ jobs:
 
   test-image:
     runs-on: [self-hosted, rpi]
+    timeout-minutes: 720
     if: ${{ github.event.inputs.test == 'true' }}
     needs:
       [
